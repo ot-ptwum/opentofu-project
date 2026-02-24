@@ -18,17 +18,17 @@ variable "container_port" {
   default = "80"
 }
 
-variable "cpu" {
+variable "cpu_size" {
   type    = string
   default = "256"
 }
 
-variable "memory" {
+variable "memory_size" {
   type    = string
   default = "512"
 }
 
-variable "auto_deploy" {
+variable "auto_deploy_service" {
   type    = bool
   default = false
 }
@@ -43,7 +43,7 @@ variable "tags" {
   default = { Managed = "orangetech.io" }
 }
 
-variable "custom_domain" {
+variable "service_custom_domain" {
   type        = string
   description = "Custom domain for the App Runner service"
 }
