@@ -49,18 +49,18 @@ resource "aws_apprunner_service" "this" {
       }
     }
 
-    auto_deployments_enabled = var.auto_deploy
+    auto_deployments_enabled = var.auto_deploy_service
   }
 
   instance_configuration {
-    cpu    = var.cpu
-    memory = var.memory
+    cpu    = var.cpu_size
+    memory = var.memory_size
   }
 
   tags = var.tags
 }
 
 resource "aws_apprunner_custom_domain_association" "this" {
-  domain_name = var.custom_domain
+  domain_name = var.service_custom_domain
   service_arn = aws_apprunner_service.this.arn
 }
