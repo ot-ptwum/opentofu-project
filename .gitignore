@@ -1,0 +1,17 @@
+# State files (contains sensitive infrastructure details)
+*.tfstate
+*.tfstate.backup
+.terraform.tfstate.lock.info
+
+# Provider plugins (large binary files, no need to push)
+.terraform/
+
+# Variable files (may contain sensitive values)
+*.tfvars
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Environment variables
+.env
