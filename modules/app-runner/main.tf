@@ -1,18 +1,3 @@
-terraform {
-  required_version = ">= 1.10"
-
-  required_providers {
-    aws = {
-      source  = "registry.opentofu.org/hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = var.aws_region
-}
-
 resource "aws_iam_role" "apprunner_ecr_access" {
   name = "${var.service_name}-ecr-access-role"
 
@@ -49,18 +34,19 @@ resource "aws_apprunner_service" "this" {
       }
     }
 
-    auto_deployments_enabled = var.auto_deploy_service
+    auto_deployments_enabled = var.auto_deploy
   }
 
   instance_configuration {
-    cpu    = var.cpu_size
-    memory = var.memory_size
+    cpu    = var.cpu
+    memory = var.memory
   }
 
   tags = var.tags
 }
 
 resource "aws_apprunner_custom_domain_association" "this" {
-  domain_name = var.service_custom_domain
+  count       = var.custom_domain != "" ? 1 : 0
+  domain_name = var.custom_domain
   service_arn = aws_apprunner_service.this.arn
 }
