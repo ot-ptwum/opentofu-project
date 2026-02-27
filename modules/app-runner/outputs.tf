@@ -1,5 +1,5 @@
 output "service_url" {
-  description = "Public URL of the App Runner service"
+  description = "Auto-assigned App Runner service URL"
   value       = "https://${aws_apprunner_service.this.service_url}"
 }
 
@@ -13,5 +13,5 @@ output "service_status" {
 
 output "custom_domain_validation_records" {
   description = "DNS records to add in Cloudflare"
-  value       = aws_apprunner_custom_domain_association.this.certificate_validation_records
+  value       = length(aws_apprunner_custom_domain_association.this) > 0 ? aws_apprunner_custom_domain_association.this[0].certificate_validation_records : []
 }
